@@ -1054,14 +1054,14 @@ void GraphXfer::run(int depth, Graph* graph,
     }
     // TODO: remove me for better performance
     assert(newGraph->check_correctness());
-    if (newGraph->total_cost() < threshold && (int)newGraph->inEdges.size() < maxNumOps) {
+    //if (newGraph->total_cost() < threshold && (int)newGraph->inEdges.size() < maxNumOps) {
       if (hashmap.find(newGraph->hash()) == hashmap.end()) {
         hashmap.insert(newGraph->hash());
         candidates.push(newGraph);
       }
-    } else {
+    /*} else {
       delete newGraph;
-    }
+    }*/
   } else {
     OpX* srcOp = srcOps[depth];
     std::map<Op, std::set<Edge, EdgeCompare>, OpCompare>::const_iterator it;
