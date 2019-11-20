@@ -451,7 +451,7 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
       //for (size_t j = 0; j < xfers[i]->dstOps.size(); j++) {
       //  printf("dstOps[%zu]: type(%d)\n", j, xfers[i]->dstOps[j]->type);
       //}
-      xfers[i]->run(0, subGraph, candidates, hashmap, bestCost * alpha, 2 * maxNumOps);
+      xfers[i]->run(0, subGraph, candidates, hashmap, bestCost * alpha, 2 * maxNumOps, i);
     }
     if (bestGraph != subGraph) {
       delete subGraph;

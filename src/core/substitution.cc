@@ -1014,7 +1014,7 @@ void GraphXfer::unmatch(OpX* srcOp, Op op, Graph* graph)
 
 void GraphXfer::run(int depth, Graph* graph,
                     std::priority_queue<Graph*, std::vector<Graph*>, GraphCompare>& candidates,
-                    std::set<size_t>& hashmap, float threshold, int maxNumOps)
+                    std::set<size_t>& hashmap, float threshold, int maxNumOps, int substtype)
 {
   //printf("run: depth(%d) srcOps.size(%zu) graph.size(%zu) candidates(%zu)\n", depth, srcOps.size(), graph->inEdges.size(), candidates.size());
   if (depth >= (int)srcOps.size()) {
@@ -1060,6 +1060,7 @@ void GraphXfer::run(int depth, Graph* graph,
 	/*for (size_t i = 0; i < bestGraph->subst_history.size(); i++) {
 		printf("        substitution[%03zu]: \n", i);*/
 		Graph::GraphSubst subst = newGraph->subst_history.back();
+		printf("            substType %d\n", substtype);
 		for (size_t j = 0; j < subst.srcOps.size(); j++) {
 			printf("            srcOp[%zu]: %s\n", j, subst.srcOps[j].to_string().c_str());
 		}
@@ -1088,7 +1089,7 @@ void GraphXfer::run(int depth, Graph* graph,
         Op op = it->first;
         // Check mapOutput
         match(srcOp, op, graph);
-        run(depth + 1, graph, candidates, hashmap, threshold, maxNumOps);
+        run(depth + 1, graph, candidates, hashmap, threshold, maxNumOps, substtype);
         unmatch(srcOp, op, graph);
       }
     }
