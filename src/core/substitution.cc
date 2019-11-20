@@ -1054,6 +1054,21 @@ void GraphXfer::run(int depth, Graph* graph,
     }
     // TODO: remove me for better performance
     assert(newGraph->check_correctness());
+
+	//print successful subst
+	printf("        ===== Applied Substitutions =====\n\n");
+	/*for (size_t i = 0; i < bestGraph->subst_history.size(); i++) {
+		printf("        substitution[%03zu]: \n", i);*/
+		Graph::GraphSubst subst = newGraph->subst_history.back();
+		for (size_t j = 0; j < subst.srcOps.size(); j++) {
+			printf("            srcOp[%zu]: %s\n", j, subst.srcOps[j].to_string().c_str());
+		}
+		for (size_t j = 0; j < subst.dstOps.size(); j++) {
+			printf("            dstOp[%zu]: %s\n", j, subst.dstOps[j].to_string().c_str());
+		}
+		newGraph->print_costs();
+	//}
+
     //if (newGraph->total_cost() < threshold && (int)newGraph->inEdges.size() < maxNumOps) {
       if (hashmap.find(newGraph->hash()) == hashmap.end()) {
 		printf("add candidate!\n");
