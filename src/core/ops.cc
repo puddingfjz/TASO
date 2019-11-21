@@ -402,7 +402,13 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
     assert(false);
   }
   std::string graph_subst_file = std::string(taso_path) + "/graph_subst.pb";
-  GraphXfer::load_graph_xfer_from_pb_file(model, xfers, graph_subst_file);
+  
+
+  ///////////////////////////////////////
+  //GraphXfer::load_graph_xfer_from_pb_file(model, xfers, graph_subst_file);
+  ///////////////////////////////////////
+
+
   //xfers.push_back(create_fuse_conv_batch_xfer(model));
   //xfers.push_back(create_fuse_conv_relu_xfer(model));
   //xfers.push_back(create_merge_conv_xfer(model));
