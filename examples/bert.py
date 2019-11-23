@@ -41,4 +41,4 @@ t = input
 for i in range(8):
     t = attention(graph, t, 16)
 
-new_graph = ts.optimize(graph, alpha=1.0, budget=100)
+new_graph = ts.optimize(graph, alpha=1.0, budget=-1)

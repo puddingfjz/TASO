@@ -30,5 +30,5 @@ for i in range(length):
 state = graph.new_weight(dims=(1, hidden_size))
 for i in range(length):
     state = nas_node(graph, state, xs[i])
-new_graph = taso.optimize(graph, alpha=1.0, budget=100)
+new_graph = taso.optimize(graph, alpha=1.0, budget=-1)
 onnx_model = taso.export_onnx(new_graph)

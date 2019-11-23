@@ -37,6 +37,6 @@ for i in range(3):
     t = resnet_block(graph, t, strides, 512)
     strides = (1,1)
 
-new_graph = ts.optimize(graph, alpha=1.0, budget=1000)
+new_graph = ts.optimize(graph, alpha=1.0, budget=-1)
 #onnx_model = ts.export_onnx(new_graph)
 

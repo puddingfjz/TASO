@@ -80,7 +80,7 @@ def main(args):
         original_model = ts.export_onnx(graph)
         onnx.save(original_model, 'original_model.onnx')
 
-    new_graph = ts.optimize(graph, alpha=1.0, budget=1000)
+    new_graph = ts.optimize(graph, alpha=1.0, budget=-1)
     if args.save_graphs:
         optimized_model = ts.export_onnx(new_graph)
         onnx.save(optimized_model, 'optimized_model.onnx')

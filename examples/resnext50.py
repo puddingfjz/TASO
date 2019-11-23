@@ -41,7 +41,7 @@ for i in range(3):
     t = resnext_block(graph, t, strides, 1024, 32)
     strides = (1,1)
 
-new_graph = ts.optimize(graph, alpha=1.0, budget=100)
+new_graph = ts.optimize(graph, alpha=1.0, budget=-1)
 onnx_model = ts.export_onnx(new_graph)
 onnx.checker.check_model(onnx_model)
 onnx.save(onnx_model, "resnext50_xflow.onnx")

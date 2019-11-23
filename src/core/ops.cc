@@ -441,10 +441,17 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
       bestCost = subGraph->total_cost();
       bestGraph = subGraph;
     }
-    if (counter > budget) {
+
+
+	//////////////////////////////
+	//when budget <= 0, we do not have the budget constraint, and the stopping condition is that all candidates are checked
+	if ((budget > 0) && (counter > budget)) {
       // TODO: free all remaining candidates when budget exhausted 
       break;
     }
+	//////////////////////////////
+
+
     if (counter % 1 == 0) {
       printf("        [%d] cost = %.4lf bestCost = %.4lf candidates.size() = %zu\n", counter, subGraph->total_cost(), bestCost, candidates.size());
       //timer_fs << microsecond_timer() - start_time << ", " << bestCost << std::endl;
@@ -482,6 +489,11 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
       }
     }
   }
+
+  ////////////////
+  //print counter
+  printf("        counter: %d\n", counter);
+  ////////////////
   return bestGraph;
 }
 
