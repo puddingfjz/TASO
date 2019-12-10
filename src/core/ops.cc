@@ -416,9 +416,13 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
   //xfers.push_back(create_enlarge_conv_xfer(model));
   //xfers.push_back(create_resnet_merge_xfer(model));
 
-  std::priority_queue<Graph*, std::vector<Graph*>, GraphCompare> candidates;
+  //std::priority_queue<Graph*, std::vector<Graph*>, GraphCompare> candidates;
+  //changing the "candidates" from priority_queue to deque
+  std::deque<Graph*> candidates;
+
+
   std::set<size_t> hashmap;
-  candidates.push(this);
+  candidates.push_back(this);
   hashmap.insert(hash());
   Graph *bestGraph = this;
   float bestCost = total_cost();
@@ -434,8 +438,11 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
   timer_fs.open("timer.txt");
   printf("\n        ===== Start Cost-Based Backtracking Search =====\n");
   while (!candidates.empty()) {
-    Graph *subGraph = candidates.top();
-    candidates.pop();
+    /*Graph *subGraph = candidates.top();
+    candidates.pop();*/
+	Graph *subGraph = candidates.front()
+	candidates.pop_front();
+
     if (subGraph->total_cost() < bestCost) {
       delete bestGraph;
       bestCost = subGraph->total_cost();

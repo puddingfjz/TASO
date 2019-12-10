@@ -36,6 +36,7 @@ using namespace nvinfer1;
 #include <map>
 #include <array>
 #include <vector>
+#include <deque>
 #include <set>
 #include <list>
 #include <iostream>

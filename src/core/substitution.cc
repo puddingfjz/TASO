@@ -1012,9 +1012,12 @@ void GraphXfer::unmatch(OpX* srcOp, Op op, Graph* graph)
   srcOp->mapOp.ptr = NULL;
 }
 
+//void GraphXfer::run(int depth, Graph* graph,
+//                    std::priority_queue<Graph*, std::vector<Graph*>, GraphCompare>& candidates,
+//                    std::set<size_t>& hashmap, float threshold, int maxNumOps, int substtype)
 void GraphXfer::run(int depth, Graph* graph,
-                    std::priority_queue<Graph*, std::vector<Graph*>, GraphCompare>& candidates,
-                    std::set<size_t>& hashmap, float threshold, int maxNumOps, int substtype)
+	std::deque<Graph*>& candidates,
+	std::set<size_t>& hashmap, float threshold, int maxNumOps, int substtype)
 {
   //printf("run: depth(%d) srcOps.size(%zu) graph.size(%zu) candidates(%zu)\n", depth, srcOps.size(), graph->inEdges.size(), candidates.size());
   if (depth >= (int)srcOps.size()) {
@@ -1074,7 +1077,7 @@ void GraphXfer::run(int depth, Graph* graph,
       if (hashmap.find(newGraph->hash()) == hashmap.end()) {
 		printf("add candidate!\n");
         hashmap.insert(newGraph->hash());
-        candidates.push(newGraph);
+        candidates.push_back(newGraph);
       }
     /*} else {
       delete newGraph;
