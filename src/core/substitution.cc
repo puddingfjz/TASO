@@ -1064,12 +1064,12 @@ void GraphXfer::run(int depth, Graph* graph,
 	printf("        ===== Print subst history =====\n\n");
 	for (size_t i = 0; i < graph->subst_history.size(); i++) {
 	Graph::GraphSubst subst = graph->subst_history[i];
-	printf("        substitution[%03zu]  order:%d  type:%d   :\n", i, subst.order, subst.substType);
+	printf("        substitution[%03zu]  :\n", i);
 	for (size_t j = 0; j < subst.srcOps.size(); j++) {
-	printf("            srcOp[%zu]: %s    substOrder:%d  substID:%d \n", j, subst.srcOps[j].to_string().c_str(), subst.srcOps[j].SIStepOrder, subst.srcOps[j].SIidx);
+	printf("            srcOp[%zu]: %s    \n", j, subst.srcOps[j].to_string().c_str());
 	}
 	for (size_t j = 0; j < subst.dstOps.size(); j++) {
-	printf("            dstOp[%zu]: %s    substOrder:%d  substID:%d \n", j, subst.dstOps[j].to_string().c_str(), subst.dstOps[j].SIStepOrder, subst.dstOps[j].SIidx);
+	printf("            dstOp[%zu]: %s    \n", j, subst.dstOps[j].to_string().c_str());
 	}
 	}
 
@@ -1081,10 +1081,10 @@ void GraphXfer::run(int depth, Graph* graph,
 	//Graph::GraphSubst subst = newGraph->subst_history.back();
 	printf("            substType %d\n", substType);
 	for (size_t j = 0; j < srcOps.size(); j++) {
-	printf("            srcOp[%zu]: %s    substOrder:%d  substID:%d \n", j, srcOps[j]->mapOp.to_string().c_str(), srcOps[j]->mapOp.SIStepOrder, srcOps[j]->mapOp.SIidx);
+	printf("            srcOp[%zu]: %s    \n", j, srcOps[j]->mapOp.to_string().c_str());
 	}
 	for (size_t j = 0; j < dstOps.size(); j++) {
-	printf("            dstOp[%zu]: %s    substOrder:%d  substID:%d \n", j, dstOps[j]->mapOp.to_string().c_str(), dstOps[j]->mapOp.SIStepOrder, dstOps[j]->mapOp.SIidx);
+	printf("            dstOp[%zu]: %s    \n", j, dstOps[j]->mapOp.to_string().c_str());
 	}
 
 
