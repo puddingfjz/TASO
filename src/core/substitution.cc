@@ -1079,7 +1079,7 @@ void GraphXfer::run(int depth, Graph* graph,
 	/*for (size_t i = 0; i < bestGraph->subst_history.size(); i++) {
 	printf("        substitution[%03zu]: \n", i);*/
 	//Graph::GraphSubst subst = newGraph->subst_history.back();
-	printf("            substType %d\n", substType);
+	printf("            substType %d\n", substtype);
 	for (size_t j = 0; j < srcOps.size(); j++) {
 	printf("            srcOp[%zu]: %s    \n", j, srcOps[j]->mapOp.to_string().c_str());
 	}
