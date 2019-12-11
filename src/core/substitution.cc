@@ -1105,7 +1105,7 @@ void GraphXfer::run(int depth, Graph* graph,
 
     //if (newGraph->total_cost() < threshold && (int)newGraph->inEdges.size() < maxNumOps) {
       if (hashmap.find(newGraph->hash()) == hashmap.end()) {
-		//printf("add candidate!\n");
+		printf("add candidate!\n");
         hashmap.insert(newGraph->hash());
         candidates.push_back(newGraph);
       }
