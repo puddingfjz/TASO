@@ -434,13 +434,16 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
   int counter = 0;
   int maxNumOps = inEdges.size();
   //long long start_time = microsecond_timer();
+  //record time
+  auto start_time = std::chrono::system_clock::now();
+
   ofstream timer_fs;
   timer_fs.open("timer.txt");
   printf("\n        ===== Start Cost-Based Backtracking Search =====\n");
   while (!candidates.empty()) {
     /*Graph *subGraph = candidates.top();
     candidates.pop();*/
-	Graph *subGraph = candidates.front()
+	Graph *subGraph = candidates.front();
 	candidates.pop_front();
 
     if (subGraph->total_cost() < bestCost) {
@@ -450,20 +453,40 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
     }
 
 
+	//every graph in candidates will be counted
+	if (counter % 1 == 0) {
+		printf("        [%d] cost = %.4lf bestCost = %.4lf candidates.size() = %zu\n", counter, subGraph->total_cost(), bestCost, candidates.size());
+		//timer_fs << microsecond_timer() - start_time << ", " << bestCost << std::endl;
+	}
+	counter++;
+
+
 	//////////////////////////////
 	//when budget <= 0, we do not have the budget constraint, and the stopping condition is that all candidates are checked
-	if ((budget > 0) && (counter > budget)) {
-      // TODO: free all remaining candidates when budget exhausted 
-      break;
-    }
+	//if ((budget > 0) && (counter > budget)) {
+ //     // TODO: free all remaining candidates when budget exhausted 
+ //     break;
+ //   }
+	
+	//change the "budget" meaning from "the max number of computation graphs to be checked" to "the max length of the subst history of a optimized computation graph"
+	if ((budget > 0) && (subGraph->subst_history.size() >= (size_t)budget))
+	{
+		//still need to delete this graph if it is not the best one
+		if (bestGraph != subGraph) {
+			delete subGraph;
+		}
+		continue;
+	}
 	//////////////////////////////
 
 
-    if (counter % 1 == 0) {
-      printf("        [%d] cost = %.4lf bestCost = %.4lf candidates.size() = %zu\n", counter, subGraph->total_cost(), bestCost, candidates.size());
-      //timer_fs << microsecond_timer() - start_time << ", " << bestCost << std::endl;
-    }
-    counter ++;
+    //if (counter % 1 == 0) {
+    //  printf("        [%d] cost = %.4lf bestCost = %.4lf candidates.size() = %zu\n", counter, subGraph->total_cost(), bestCost, candidates.size());
+    //  //timer_fs << microsecond_timer() - start_time << ", " << bestCost << std::endl;
+    //}
+    //counter ++;
+
+
     for (size_t i = 0; i < xfers.size(); i++) {
       //for (size_t j = 0; j < xfers[i]->srcOps.size(); j++) {
       //  printf("srcOps[%zu]: type(%d)\n", j, xfers[i]->srcOps[j]->type);
@@ -479,6 +502,13 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
   }
   bestGraph = bestGraph->preprocess_weights();
   printf("        ===== Finish Cost-Based Backtracking Search =====\n\n");
+
+  //record time
+  auto end_time = std::chrono::system_clock::now();
+  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+  timer_fs << double(duration.count()) * std::chrono::microseconds::period::num / std::chrono::microseconds::period::den << std::endl;
+  timer_fs.close();
+
   //printf("bestCost = %.4lf\n", bestGraph->total_cost());
   //printf("Optimized graph: end-to-end execution time =\n");
   //printf("%.8lf ms (average of 100 runs)\n", bestGraph->run());

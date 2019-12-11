@@ -42,6 +42,7 @@ using namespace nvinfer1;
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <chrono>
 using namespace std;
 
 namespace taso {
