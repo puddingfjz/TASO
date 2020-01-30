@@ -23,7 +23,11 @@ echo "WORKSPACE: ${WORKSPACE}"
 echo "IMAGE NAME: ${IMAGE_NAME}"
 echo "DOCKER BINARY: nvidia-docker"
 
-nvidia-docker run --rm --pid=host \
+#nvidia-docker run --rm --pid=host \
+#    -it --net=host \
+#   ${IMAGE_NAME} \
+#   ${COMMAND[@]}
+docker run --gpus all --rm --pid=host \
     -it --net=host \
     ${IMAGE_NAME} \
     ${COMMAND[@]}
