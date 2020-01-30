@@ -405,7 +405,7 @@ Graph* Graph::optimize(float alpha, int budget, bool print_subst)
   
 
   ///////////////////////////////////////
-  //GraphXfer::load_graph_xfer_from_pb_file(model, xfers, graph_subst_file);
+  GraphXfer::load_graph_xfer_from_pb_file(model, xfers, graph_subst_file);
   ///////////////////////////////////////
 
 
