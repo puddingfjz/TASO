@@ -1061,7 +1061,7 @@ void GraphXfer::run(int depth, Graph* graph,
 	//In order to check whether two substs are redundant or not, print the information of substs here
 
 	//print subst history
-	printf("        ===== Print subst history =====\n\n");
+	/*printf("        ===== Print subst history =====\n\n");
 	for (size_t i = 0; i < graph->subst_history.size(); i++) {
 	Graph::GraphSubst subst = graph->subst_history[i];
 	printf("        substitution[%03zu]  :\n", i);
@@ -1071,21 +1071,21 @@ void GraphXfer::run(int depth, Graph* graph,
 	for (size_t j = 0; j < subst.dstOps.size(); j++) {
 	printf("            dstOp[%zu]: %s    \n", j, subst.dstOps[j].to_string().c_str());
 	}
-	}
+	}*/
 
 
 	//print successful subst
-	printf("        ===== Applied Substitutions before checking =====\n\n");
+	//printf("        ===== Applied Substitutions before checking =====\n\n");
 	/*for (size_t i = 0; i < bestGraph->subst_history.size(); i++) {
 	printf("        substitution[%03zu]: \n", i);*/
 	//Graph::GraphSubst subst = newGraph->subst_history.back();
-	printf("            substType %d\n", substtype);
+	/*printf("            substType %d\n", substtype);
 	for (size_t j = 0; j < srcOps.size(); j++) {
 	printf("            srcOp[%zu]: %s    \n", j, srcOps[j]->mapOp.to_string().c_str());
 	}
 	for (size_t j = 0; j < dstOps.size(); j++) {
 	printf("            dstOp[%zu]: %s    \n", j, dstOps[j]->mapOp.to_string().c_str());
-	}
+	}*/
 
 
 	//print successful subst
@@ -1105,7 +1105,7 @@ void GraphXfer::run(int depth, Graph* graph,
 
     //if (newGraph->total_cost() < threshold && (int)newGraph->inEdges.size() < maxNumOps) {
       if (hashmap.find(newGraph->hash()) == hashmap.end()) {
-		printf("add candidate!\n");
+		//printf("add candidate!\n");
         hashmap.insert(newGraph->hash());
         candidates.push_back(newGraph);
       }
